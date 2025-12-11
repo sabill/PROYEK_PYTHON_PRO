@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="text-center">
+    <h1>Selamat Datang di Portal NLP</h1>
+    <p>Cek cuaca sebelum belajar!</p>
+
+    <form method="POST" class="my-4 d-inline-block">
+        <div class="input-group">
+            <span class="input-group-text bg-primary text-white">📍 Pilih Kota</span>
+            <select name="city" class="form-select" required>
+                <option value="" disabled selected>-- Klik untuk memilih --</option>
+                <option value="Jakarta">Jakarta</option>
+                <option value="Depok">Depok</option>
+                <option value="Bogor">Bogor</option>
+                <option value="Tangerang">Tangerang</option>
+                <option value="Bekasi">Bekasi</option>
+                <option value="Bandung">Bandung</option>
+                <option value="Surabaya">Surabaya</option>
+                <option value="Yogyakarta">Yogyakarta</option>
+                <option value="Semarang">Semarang</option>
+                <option value="Medan">Medan</option>
+                <option value="Bali">Bali</option>
+            </select>
+            <button class="btn btn-primary" type="submit">Cek Cuaca</button>
+        </div>
+    </form>
+
+    {% if weather %}
+    <div class="card mx-auto" style="max-width: 800px;">
+        <div class="card-header bg-info text-white">
+            <h4>Ramalan Cuaca: {{ weather.city }}</h4> </div>
+        <div class="card-body">
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>Hari</th> <th>Tanggal</th>
+                        <th>Kondisi</th>
+                        <th>Suhu Siang</th> <th>Suhu Malam</th> </tr>
+                </thead>
+                <tbody>
+                    {% for day in weather.forecast %}
+                    <tr>
+                        <td>{{ day.day_name }}</td>
+                        <td>{{ day.date }}</td>
+                        <td>{{ day.condition }}</td>
+                        <td class="text-danger fw-bold">{{ day.temp_day }}°C</td>
+                        <td class="text-primary fw-bold">{{ day.temp_night }}°C</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

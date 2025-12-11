@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container text-center">
+    
+    <div class="alert alert-info d-inline-block">
+        <h4>Skor Total Anda: <span class="badge bg-warning text-dark">{{ current_user.total_score }}</span></h4>
+    </div>
+
+    <div class="card mt-4 shadow-lg">
+        <div class="card-body">
+            <h3 class="card-title mb-4">{{ q.q }}</h3> <form method="POST">
+                <input type="hidden" name="correct_answer" value="{{ q.a }}">
+                
+                <div class="d-grid gap-2 col-8 mx-auto">
+                    {% for opt in options %}
+                    <button type="submit" name="answer" value="{{ opt }}" class="btn btn-outline-primary btn-lg mb-2">
+                        {{ opt }}
+                    </button>
+                    {% endfor %}
+                </div>
+            </form>
+            
+            <p class="text-muted mt-3">Pertanyaan akan muncul terus menerus secara acak.</p> </div>
+    </div>
+</div>
+{% endblock %}
